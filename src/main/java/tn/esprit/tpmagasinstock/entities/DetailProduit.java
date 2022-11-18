@@ -17,12 +17,18 @@ public class DetailProduit implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idDetailProduit ;
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreation ;
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateDerniereModification ;
     @Enumerated(EnumType.STRING)
     private CategoriProduit categoriProduit ;
     @OneToOne(mappedBy = "detailProduit")
     public Produit produit;
+
+    public DetailProduit(Date dateCreation, Date dateDerniereModification, CategoriProduit categoriProduit) {
+        this.dateCreation = new Date();
+        this.dateDerniereModification = dateDerniereModification;
+        this.categoriProduit = categoriProduit;
+    }
 }
