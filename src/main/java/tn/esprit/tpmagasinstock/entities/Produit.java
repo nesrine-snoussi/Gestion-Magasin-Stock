@@ -1,5 +1,6 @@
 package tn.esprit.tpmagasinstock.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,7 +26,9 @@ public class Produit implements Serializable {
     private List<DetailFacture> detailFactures;
     @OneToOne
     public DetailProduit detailProduit;
+
     @ManyToOne(cascade = CascadeType.PERSIST)
+    @JsonIgnore
     private Stock stock;
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Rayon rayon;

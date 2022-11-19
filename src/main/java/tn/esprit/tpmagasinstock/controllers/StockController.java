@@ -32,4 +32,11 @@ public class StockController {
     void deleteStock(@PathVariable Long idStock) {
         stockService.delete(idStock);
     }
+    @PostMapping("/addProduitToStock")
+
+    void assignProduitToStock(@RequestParam Long idProduit, @RequestParam Long idStock) {
+        stockService.assignProduitToStock(idProduit,idStock);
+
+
+    }
 }

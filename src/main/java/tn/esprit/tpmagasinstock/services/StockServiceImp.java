@@ -2,8 +2,10 @@ package tn.esprit.tpmagasinstock.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tn.esprit.tpmagasinstock.entities.Produit;
 import tn.esprit.tpmagasinstock.entities.Stock;
 import tn.esprit.tpmagasinstock.entities.Stock;
+import tn.esprit.tpmagasinstock.repositories.ProduitRepository;
 import tn.esprit.tpmagasinstock.repositories.StockRepository;
 
 import java.util.List;
@@ -13,6 +15,8 @@ import java.util.List;
 public class StockServiceImp implements ICrudService<Stock , Long> , IStockService {
     @Autowired
     StockRepository stockRepository ;
+    @Autowired
+    ProduitRepository produitRepository ;
     @Override
     public List<Stock> getAll() {
         return stockRepository.findAll();
@@ -44,6 +48,23 @@ public class StockServiceImp implements ICrudService<Stock , Long> , IStockServi
     @Override
     public void delete(Long idProduit) {
         stockRepository.deleteById(idProduit);
+
+    }
+
+    @Override
+    public void assignProduitToStock(Long idProduit, Long idStock) {
+        Stock stock = stockRepository.findById(idStock).get();
+        //System.out.println(stock.getQteStock());
+        Produit produit = produitRepository.findById(idProduit).get();
+        //System.out.println(produit.getCodeProduit());
+        produit.setStock(stock);
+        stock.getProduits().add(produit);
+        System.out.println(stock.getProduits());
+        produitRepository.save(produit);
+        stockRepository.save(stock);
+
+
+
 
     }
 }
