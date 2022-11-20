@@ -1,5 +1,6 @@
 package tn.esprit.tpmagasinstock.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +23,7 @@ public class Facture {
     private Float montantFacture ;
     private Boolean active ;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Client client;
 
     @OneToMany(mappedBy = "facture")

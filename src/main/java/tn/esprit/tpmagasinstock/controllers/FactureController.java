@@ -32,4 +32,10 @@ public class FactureController {
     void deleteClient(@PathVariable Long idFacture) {
         factureService.delete(idFacture);
     }
+
+    @GetMapping("/getFactureByClient")
+    List<Facture> getFacturesByClient(@RequestParam Long idClient) {
+        return factureService.getFacturesByClient(idClient);
+
+    }
 }

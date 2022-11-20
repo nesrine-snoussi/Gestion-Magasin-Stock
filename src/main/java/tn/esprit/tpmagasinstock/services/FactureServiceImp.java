@@ -7,6 +7,7 @@ import tn.esprit.tpmagasinstock.entities.Facture;
 import tn.esprit.tpmagasinstock.repositories.FactureRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class FactureServiceImp implements ICrudService<Facture ,Long> , IFactureService{
@@ -42,6 +43,13 @@ public class FactureServiceImp implements ICrudService<Facture ,Long> , IFacture
     @Override
     public void delete(Long idFacture) {
         factureRepository.deleteById(idFacture);
+
+    }
+
+    @Override
+    public List<Facture> getFacturesByClient(Long idClient) {
+       // return factureRepository.findFactureByClient(idClient);
+        return factureRepository.findAll().stream().filter(facture -> facture.getClient().getIdClient().equals(idClient)).collect(Collectors.toList());
 
     }
 }

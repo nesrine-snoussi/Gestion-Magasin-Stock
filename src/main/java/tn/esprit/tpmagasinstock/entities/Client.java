@@ -1,5 +1,7 @@
 package tn.esprit.tpmagasinstock.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,6 +38,7 @@ public class Client implements Serializable {
     @Enumerated (EnumType.STRING)
     private Profession profession ;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "client")
     private List<Facture> factures;
 }
