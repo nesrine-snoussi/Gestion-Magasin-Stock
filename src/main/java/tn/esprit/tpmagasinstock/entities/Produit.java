@@ -32,7 +32,9 @@ public class Produit implements Serializable {
     private Stock stock;
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Rayon rayon;
-    @OneToMany
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idFournisseur")
+    @JoinColumn(name = "idProduit")
     private List<Fournisseur> fournisseurs;
 
 }

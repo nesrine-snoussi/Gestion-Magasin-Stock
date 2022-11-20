@@ -4,7 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.esprit.tpmagasinstock.entities.Fournisseur;
 import tn.esprit.tpmagasinstock.entities.Fournisseur;
+import tn.esprit.tpmagasinstock.entities.Produit;
+import tn.esprit.tpmagasinstock.entities.Stock;
 import tn.esprit.tpmagasinstock.repositories.FournisseurRepository;
+import tn.esprit.tpmagasinstock.repositories.ProduitRepository;
 
 import java.util.List;
 
@@ -12,6 +15,8 @@ import java.util.List;
 public class FournisseurServiceImp implements ICrudService<Fournisseur , Long > , IFournisseurService  {
     @Autowired
     FournisseurRepository fournisseurRepository ;
+    @Autowired
+    ProduitRepository produitRepository ;
     @Override
     public List<Fournisseur> getAll() {
         return fournisseurRepository.findAll();
@@ -38,6 +43,20 @@ public class FournisseurServiceImp implements ICrudService<Fournisseur , Long > 
     @Override
     public void delete(Long idFournisseur) {
         fournisseurRepository.deleteById(idFournisseur);
+
+    }
+
+    @Override
+    public void assignFournisseurToProduit(Long idFournisseur, Long idProduit) {
+        Fournisseur  fournisseur = fournisseurRepository.findById(idFournisseur).get();
+        //System.out.println(stock.getQteStock());
+        Produit produit = produitRepository.findById(idProduit).get();
+        produit.getFournisseurs().add(fournisseur);
+        System.out.println(produit.getFournisseurs());
+        produitRepository.save(produit);
+        fournisseurRepository.save(fournisseur);
+
+
 
     }
 }
