@@ -50,7 +50,9 @@ public class ClientServiceImp implements ICrudService<Client , Long > , IClientS
         try {
             return clientRepository.getChiffreAffaireParCategorieClient(categorieClient, startDate, endDate);
         } catch (Exception e) {
-            return 0;
+            return 0 ;
         }
+
+
     }
 }

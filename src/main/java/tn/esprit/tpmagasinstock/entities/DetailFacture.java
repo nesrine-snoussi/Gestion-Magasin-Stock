@@ -1,5 +1,6 @@
 package tn.esprit.tpmagasinstock.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,7 +22,9 @@ public class DetailFacture implements Serializable {
     private int pourcentageRemise ;
     private int montantRemise ;
     @ManyToOne(cascade = CascadeType.PERSIST)
+    @JsonIgnore
     private Facture facture;
     @ManyToOne(cascade = CascadeType.PERSIST)
+    @JsonIgnore
     private Produit produit;
 }

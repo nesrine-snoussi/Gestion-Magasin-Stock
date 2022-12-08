@@ -6,6 +6,7 @@ import tn.esprit.tpmagasinstock.entities.Produit;
 import tn.esprit.tpmagasinstock.entities.Produit;
 import tn.esprit.tpmagasinstock.repositories.ProduitRepository;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -42,5 +43,11 @@ public class ProduitServiceImp implements ICrudService<Produit , Long> , IProdui
     public void delete(Long idProduit) {
         produitRepository.deleteById(idProduit);
 
+    }
+
+    @Override
+    public float getRevenuBrutProduit(Long idProduit, Date startDate, Date endDate) {
+        Produit produit = produitRepository.findById(idProduit).orElse(null);
+        return produitRepository.getRevenuBrutProduit(produit, startDate, endDate);
     }
 }

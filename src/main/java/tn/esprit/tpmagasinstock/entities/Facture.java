@@ -1,6 +1,7 @@
 package tn.esprit.tpmagasinstock.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,5 +33,6 @@ public class Facture {
     private Client client;
 
     @OneToMany(mappedBy = "facture")
+    @JsonIgnore
     private List<DetailFacture> detailFactures;
 }
