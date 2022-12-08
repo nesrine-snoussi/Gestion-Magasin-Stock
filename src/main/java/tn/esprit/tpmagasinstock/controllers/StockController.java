@@ -39,4 +39,10 @@ public class StockController {
 
 
     }
+
+    @GetMapping ("/ListProduits")
+    public String retrieveStatusStock() {
+        return stockService.retrieveStatusStock() ;
+
+    }
 }

@@ -1,6 +1,7 @@
 package tn.esprit.tpmagasinstock.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import tn.esprit.tpmagasinstock.entities.Produit;
 import tn.esprit.tpmagasinstock.entities.Stock;
@@ -8,7 +9,9 @@ import tn.esprit.tpmagasinstock.entities.Stock;
 import tn.esprit.tpmagasinstock.repositories.ProduitRepository;
 import tn.esprit.tpmagasinstock.repositories.StockRepository;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 
@@ -66,5 +69,17 @@ public class StockServiceImp implements ICrudService<Stock , Long> , IStockServi
 
 
 
+    }
+
+    //@Scheduled(fixedDelay = 60000)
+    @Scheduled(cron ="0 22 * * ?")
+    @Override
+    public String retrieveStatusStock() {
+
+        List<Produit> produitList =  stockRepository.getStockProduits() ;
+        produitList.stream().forEach(produit -> System.out.println(produit.getLibelleProduit()));
+       // System.out.println( produitList.stream().map(Object::toString).toArray(String[]::new)) ;
+
+        return null ;
     }
 }
