@@ -2,9 +2,11 @@ package tn.esprit.tpmagasinstock.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tn.esprit.tpmagasinstock.entities.CategorieClient;
 import tn.esprit.tpmagasinstock.entities.Client;
 import tn.esprit.tpmagasinstock.repositories.ClientRepository;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -41,5 +43,14 @@ public class ClientServiceImp implements ICrudService<Client , Long > , IClientS
     public void delete(Long idClient) {
         clientRepository.deleteById(idClient);
 
+    }
+
+    @Override
+    public float getChiffreAffaireParCategorieClient(CategorieClient categorieClient, Date startDate, Date endDate) {
+        try {
+            return clientRepository.getChiffreAffaireParCategorieClient(categorieClient, startDate, endDate);
+        } catch (Exception e) {
+            return 0;
+        }
     }
 }

@@ -2,10 +2,13 @@ package tn.esprit.tpmagasinstock.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tn.esprit.tpmagasinstock.entities.CategorieClient;
 import tn.esprit.tpmagasinstock.entities.Facture;
 
+import tn.esprit.tpmagasinstock.repositories.ClientRepository;
 import tn.esprit.tpmagasinstock.repositories.FactureRepository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,6 +19,8 @@ public class FactureServiceImp implements ICrudService<Facture ,Long> , IFacture
 
     @Autowired
     FactureRepository factureRepository ;
+    @Autowired
+    ClientRepository clientRepository ;
     @Override
     public List<Facture> getAll() {
         return factureRepository.findAll();
@@ -52,4 +57,6 @@ public class FactureServiceImp implements ICrudService<Facture ,Long> , IFacture
         return factureRepository.findAll().stream().filter(facture -> facture.getClient().getIdClient().equals(idClient)).collect(Collectors.toList());
 
     }
+
+
 }
